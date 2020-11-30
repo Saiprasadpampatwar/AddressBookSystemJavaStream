@@ -1,6 +1,7 @@
 package addressbook.javastream;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 
 
@@ -166,21 +167,19 @@ public class AddressBookMainStream {
 				break;
 			}
 		}
-		
-		Map<String, String> cityVsPerson = new HashMap<>();
-		Map<String, String> stateVsPerson = new HashMap<>();
-		System.out.println("Name : city : state");
-		DifferentAddressBook.values().forEach(s->{
-			s.contactDetails.forEach(sm->{
-				{
-					cityVsPerson.put(sm.firstname, sm.city);
-					stateVsPerson.put(sm.firstname, sm.state);
-					System.out.println(sm.firstname+" : "+sm.city+" : "+sm.state);
-				}
-			});
-		});
+		System.out.println("Which city you want to find out:");
+		String cityName = sc.next();
+		System.out.println("Which state you want to find out:");
+		String stateName = sc.next();
 
-			
+		List<Person> personlList = DifferentAddressBook.values().stream().flatMap(s->s.contactDetails.stream())
+				.collect(Collectors.toList());
+		long count = personlList.stream().filter(s->s.city.equals(cityName)).count();
+		System.out.println("head count in "+cityName+" is "+count);
+		List<Person> personlList1 = DifferentAddressBook.values().stream().flatMap(s->s.contactDetails.stream())
+				.collect(Collectors.toList());
+		long count1 = personlList1.stream().filter(s->s.state.equals(stateName)).count();
+		System.out.println("head count in "+stateName+" is "+count1);
 }
 	
 }
