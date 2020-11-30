@@ -167,19 +167,10 @@ public class AddressBookMainStream {
 				break;
 			}
 		}
-		System.out.println("Which city you want to find out:");
-		String cityName = sc.next();
-		System.out.println("Which state you want to find out:");
-		String stateName = sc.next();
-
-		List<Person> personlList = DifferentAddressBook.values().stream().flatMap(s->s.contactDetails.stream())
-				.collect(Collectors.toList());
-		long count = personlList.stream().filter(s->s.city.equals(cityName)).count();
-		System.out.println("head count in "+cityName+" is "+count);
-		List<Person> personlList1 = DifferentAddressBook.values().stream().flatMap(s->s.contactDetails.stream())
-				.collect(Collectors.toList());
-		long count1 = personlList1.stream().filter(s->s.state.equals(stateName)).count();
-		System.out.println("head count in "+stateName+" is "+count1);
+		System.out.println("\nSorted by firstname");
+		List<String> personlList1 = DifferentAddressBook.values().stream().flatMap(s->s.contactDetails.stream())
+				.map(st->st.firstname).sorted().collect(Collectors.toList());//.collect(Collectors.toList());
+		personlList1.forEach(n->System.out.println(n));
 }
 	
 }
