@@ -166,14 +166,16 @@ public class AddressBookMainStream {
 				break;
 			}
 		}
-		System.out.println("Which city you want to find out:");
-		String cityName = sc.next();
-		System.out.println("Which state you want to find out:");
-		String stateName = sc.next();
+		
+		Map<String, String> cityVsPerson = new HashMap<>();
+		Map<String, String> stateVsPerson = new HashMap<>();
+		System.out.println("Name : city : state");
 		DifferentAddressBook.values().forEach(s->{
 			s.contactDetails.forEach(sm->{
-				if(sm.city.equals(cityName) || sm.state.equals(stateName)) {
-					System.out.println(sm.firstname);
+				{
+					cityVsPerson.put(sm.firstname, sm.city);
+					stateVsPerson.put(sm.firstname, sm.state);
+					System.out.println(sm.firstname+" : "+sm.city+" : "+sm.state);
 				}
 			});
 		});
