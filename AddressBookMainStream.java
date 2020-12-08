@@ -1,5 +1,9 @@
 package addressbook.javastream;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -171,7 +175,7 @@ public class AddressBookMainStream {
 		boolean nextOption = true;
 		while (nextOption) {
 			System.out.println(
-					"Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n 4. view person and states\n 5.find head count in city\n 6.find head count in state\n 7.Sorting of entries based on firstname\n 8.Sorting of entries based on city\n 9.Sorting of entries based on state\n 10.Sorting of entries based on zip\n 11.Exit");
+					"Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n 4. view person and states\n 5.find head count in city\n 6.find head count in state\n 7.Sorting of entries based on firstname\n 8.Sorting of entries based on city\n 9.Sorting of entries based on state\n 10.Sorting of entries based on zip\n 11.Write Addressbook Data into file\n 12.Read AddressBook Data From File\n 13.Exit");
 			int option = sc.nextInt();
 			switch (option) {
 			case 1:
@@ -306,6 +310,32 @@ public class AddressBookMainStream {
 				nextOption = true;
 				break;
 			case 11:
+				StringBuffer empBuffer = new StringBuffer();
+				DifferentAddressBook.entrySet().forEach(x->{
+					String nameString = x.getKey()+"\n";
+					empBuffer.append(nameString);
+					x.getValue().contactDetails.forEach(y->{
+						String employeeDataString = y.toString().concat("\n");
+			            empBuffer.append(employeeDataString);
+					});
+				});
+		
+		        try {
+		            Files.write(Paths.get("addressBook-file.txt"), empBuffer.toString().getBytes());
+
+		        } catch (IOException e) {
+
+		        }
+				break;
+			case 12:
+				try {
+		            Files.lines(new File("addressBook-file.txt").toPath()).map(line -> line.trim()).forEach(line -> System.out.println(line));
+
+		        } catch (IOException e) {
+
+		        }
+				break;
+			case 13:
 				System.out.println("Thank You!!!!");
 				nextOption = false;
 				break;
@@ -326,6 +356,13 @@ class Person {
 	int zip;
 	int phoneno;
 	String email;
+	
+	@Override
+	public String toString() {
+		return "ContactDetails [firstName=" + firstname + ", lastName=" + lastname + ", address=" + address + ", city="
+				+ city + ", state=" + state + ", email=" + email + ", zip=" + zip + ", phoneNumber=" + phoneno
+				+ "]";
+	}
 }
 
 class AddressBook {
