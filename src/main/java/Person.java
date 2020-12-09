@@ -1,12 +1,29 @@
+import com.opencsv.bean.CsvBindByName;
+
 public class Person {
-    String firstname;
-    String lastname;
-    String address;
-    String city;
-    String state;
-    int zip;
-    int phoneno;
-    String email;
+    @CsvBindByName
+    public String firstname;
+
+    @CsvBindByName
+    public String lastname;
+
+    @CsvBindByName
+    public String address;
+
+    @CsvBindByName
+    public String city;
+
+    @CsvBindByName
+    public String state;
+
+    @CsvBindByName
+    public int zip;
+
+    @CsvBindByName
+    public int phoneno;
+
+    @CsvBindByName
+    public String email;
 
     @Override
     public String toString() {

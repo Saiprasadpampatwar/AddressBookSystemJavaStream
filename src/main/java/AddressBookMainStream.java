@@ -1,23 +1,22 @@
+import com.google.gson.Gson;
 import com.opencsv.CSVReader;
 import com.opencsv.CSVWriter;
-import com.opencsv.bean.ColumnPositionMappingStrategy;
-import com.opencsv.bean.StatefulBeanToCsv;
-import com.opencsv.bean.StatefulBeanToCsvBuilder;
+import com.opencsv.bean.*;
 import com.opencsv.exceptions.CsvDataTypeMismatchException;
 import com.opencsv.exceptions.CsvRequiredFieldEmptyException;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.Reader;
-import java.io.Writer;
+import java.io.*;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookMainStream {
     static Scanner sc = new Scanner(System.in);
-    public static final String ADDRESSBOOK_CSV_FILE = "C:\\Users\\saiprasad\\IdeaProjects\\AddressBookSystemOpenCVJson\\AddressBookSystemOpenCVJson\\addressBook.csv";
+    private static final String SAMPLE_CSV_FILE_PATH = "C:\\Users\\saiprasad\\IdeaProjects\\AddressBookSystemOpenCVJson\\AddressBookSystemOpenCVJson\\addressBook.csv";
+    private static final String SAMPLE_JSON_FILE_PATH = "C:\\Users\\saiprasad\\IdeaProjects\\AddressBookSystemOpenCVJson\\AddressBookSystemOpenCVJson\\addressBook.json";
+
 
     public static void printAllDetails(Person p) {
 
@@ -61,7 +60,7 @@ public class AddressBookMainStream {
         return p1;
     }
 
-    public static void main(String[] args) throws IOException {
+    public static <csvUserList> void main(String[] args) throws IOException {
         // TODO Auto-generated method stub
         System.out.println("Welcome to Address Book Program");
         HashMap<String, AddressBook> DifferentAddressBook = new HashMap<>();
@@ -182,7 +181,13 @@ public class AddressBookMainStream {
         boolean nextOption = true;
         while (nextOption) {
             System.out.println(
-                    "Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n 4. view person and states\n 5.find head count in city\n 6.find head count in state\n 7.Sorting of entries based on firstname\n 8.Sorting of entries based on city\n 9.Sorting of entries based on state\n 10.Sorting of entries based on zip\n 11.Write Addressbook Data into file\n 12.Read AddressBook Data From File\n 13.Write Data to CSV\n 14.Read Data From CSV\n 15.Exit");
+                    "Select 1. search a person by city\n 2.search a person by state\n " +
+                            "3. view person and cities\n 4. view person and states\n 5.find head count in city\n " +
+                            "6.find head count in state\n 7.Sorting of entries based on firstname\n " +
+                            "8.Sorting of entries based on city\n 9.Sorting of entries based on state\n " +
+                            "10.Sorting of entries based on zip\n 11.Write Addressbook Data into file\n " +
+                            "12.Read AddressBook Data From File\n 13.Write Data to CSV\n 14.Read Data From CSV\n " +
+                            "15.Write Data into JSON file\n 16.Read Data from JSON file\n 17.Exit");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
@@ -345,7 +350,7 @@ public class AddressBookMainStream {
                 case 13:
 
 
-                    try(Writer writer = Files.newBufferedWriter(Paths.get(ADDRESSBOOK_CSV_FILE));){
+                    try(Writer writer = Files.newBufferedWriter(Paths.get(SAMPLE_CSV_FILE_PATH));){
                         ColumnPositionMappingStrategy columnPositionMappingStrategy = new ColumnPositionMappingStrategy();
                         columnPositionMappingStrategy.setType(Person.class);
 
@@ -369,7 +374,7 @@ public class AddressBookMainStream {
                     }
                     break;
                 case 14:
-                    try(Reader reader = Files.newBufferedReader(Paths.get(ADDRESSBOOK_CSV_FILE));){
+                    try(Reader reader = Files.newBufferedReader(Paths.get(SAMPLE_CSV_FILE_PATH));){
                         CSVReader csvReader = new CSVReader(reader);
                         List<String[]> records = csvReader.readAll();
                         for (String[] record: records){
@@ -387,6 +392,33 @@ public class AddressBookMainStream {
 
                     break;
                 case 15:
+                    try {
+                        List<Person> listOfPersons = new ArrayList<>();
+                        DifferentAddressBook.values().forEach(x->x.contactDetails.forEach(y->{
+                            listOfPersons.add(y);
+                        }));
+                        Path filePath = Paths.get(SAMPLE_JSON_FILE_PATH);
+                        Gson gson = new Gson();
+                        String json = gson.toJson(listOfPersons);
+                        FileWriter writer = new FileWriter(String.valueOf(filePath));
+                        writer.write(json);
+                        writer.close();
+                    }catch (IOException e){
+                        e.printStackTrace();
+                    }
+
+
+                    break;
+                case 16:
+                    Gson gson1 = new Gson();
+                    BufferedReader br = new BufferedReader(new FileReader(SAMPLE_JSON_FILE_PATH));
+                    Person [] personObj = gson1.fromJson(br,Person[].class);
+                    List<Person> csvUserList = Arrays.asList(personObj);
+                    for(Person i: csvUserList){
+                        System.out.println(i.toString());
+                    }
+                    break;
+                case 17:
                     System.out.println("Thank You!!!!");
                     nextOption = false;
                     break;
