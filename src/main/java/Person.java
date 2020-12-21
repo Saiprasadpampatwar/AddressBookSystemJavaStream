@@ -1,3 +1,5 @@
+import java.util.Objects;
+
 public class Person {
     String firstname;
     String lastname;
@@ -7,6 +9,7 @@ public class Person {
     int zip;
     int phoneno;
     String email;
+    String type;
 
     @Override
     public String toString() {
@@ -77,5 +80,44 @@ public class Person {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Person person = (Person) o;
+        return zip == person.zip &&
+                phoneno == person.phoneno &&
+                Objects.equals(firstname, person.firstname) &&
+                Objects.equals(lastname, person.lastname) &&
+                Objects.equals(address, person.address) &&
+                Objects.equals(city, person.city) &&
+                Objects.equals(state, person.state) &&
+                Objects.equals(email, person.email) &&
+                Objects.equals(type, person.type);
+    }
+
+    public Person() {
+    }
+
+    public Person(String firstname, String lastname, String address, String city, String state, int zip, int phoneno, String email, String type) {
+        this.firstname = firstname;
+        this.lastname = lastname;
+        this.address = address;
+        this.city = city;
+        this.state = state;
+        this.zip = zip;
+        this.phoneno = phoneno;
+        this.email = email;
+        this.type = type;
     }
 }

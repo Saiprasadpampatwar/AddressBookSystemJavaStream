@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="AddressBookTest" tests="1" skipped="1" failures="0" errors="0" timestamp="2020-12-21T16:13:05" hostname="DESKTOP-9G5SK1M" time="29.399">
+  <properties/>
+  <testcase name="connectingToDataBaseShouldReturnCorrectNoOfRecordsFromDB" classname="AddressBookTest" time="29.399">
+    <skipped/>
+  </testcase>
+  <system-out><![CDATA[connecting to the database:jdbc:mysql://localhost:3306/addressbook_service?useSSl=false
+connection is successful!!!!com.mysql.jdbc.JDBC4Connection@f309ab3
+]]></system-out>
+  <system-err><![CDATA[Mon Dec 21 21:43:12 IST 2020 WARN: Establishing SSL connection without server's identity verification is not recommended. According to MySQL 5.5.45+, 5.6.26+ and 5.7.6+ requirements SSL connection must be established by default if explicit option isn't set. For compliance with existing applications not using SSL the verifyServerCertificate property is set to 'false'. You need either to explicitly disable SSL by setting useSSL=false, or set useSSL=true and provide truststore for server certificate verification.
+]]></system-err>
+</testsuite>
