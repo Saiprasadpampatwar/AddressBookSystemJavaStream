@@ -89,4 +89,17 @@ public class AddressBookDB {
             return true;
         return false;
     }
+
+    public void updateAddress(String firstname, String address) {
+        String sql = String.format("update address_book set address = '%s' where firstname = '%s'",address,firstname);
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            int i = statement.executeUpdate(sql);
+            if(i>0){
+                System.out.println("updated address successfully");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
 }
