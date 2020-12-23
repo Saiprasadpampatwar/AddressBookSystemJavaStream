@@ -17,3 +17,13 @@ UC13: Ability to Read or Write the Address Book with Persons Contact into a File
 UC14: Ability to Read/Write the Address Book with Persons Contact as CSV File
 
 UC15: Ability to Read or Write the Address Book with Persons Contact as JSON File
+
+UC16: Ability for the AddressBook Service to rerieve all the Entries from the DB
+
+UC17: Ability to update the Contact Information in the address book for a person and ensure that the Contact Information in the memory is in Sync with the DB
+
+UC18: Ability to Retrieve Contacts from the Database that were added in a particular period
+
+UC19: Ability to Retrieve number of Contacts in the Database by City or State
+
+UC20: Ability to Add new Contact to the Address Book Database
