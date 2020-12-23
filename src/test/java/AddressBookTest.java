@@ -30,5 +30,12 @@ public class AddressBookTest {
         List<Person> person = personList.stream().filter(p->p.firstname.equals("sai")).collect(Collectors.toList());
         Assert.assertEquals("wadi bk",person.get(0).address);
     }
+
+    @Test
+    public void givenDateRangeShouldReturnNumberOfPersonsAddedInThatRange() {
+        AddressBookDB addressBookDB = new AddressBookDB();
+        List<Person> personList = addressBookDB.retrivePersondAddedInDateRange("2018-01-01","2018-05-05");
+        Assert.assertEquals(4,personList.size());
+    }
 }
 

@@ -102,4 +102,29 @@ public class AddressBookDB {
             e.printStackTrace();
         }
     }
+
+    public List<Person> retrivePersondAddedInDateRange(String startDate, String endDate) {
+        List<Person> personList = new ArrayList<>();
+        String sql = String.format("select * from address_book where date_added between cast('%s' as date) and cast('%s' as date)",startDate,endDate);
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                Person person = new Person();
+                person.firstname = resultSet.getString("firstname");
+                person.lastname = resultSet.getString("lastname");
+                person.address = resultSet.getString("address");
+                person.city = resultSet.getString("city");
+                person.state = resultSet.getString("state");
+                person.zip = resultSet.getInt("zip");
+                person.phoneno = resultSet.getInt("phone_number");
+                person.email = resultSet.getString("email");
+                person.type = resultSet.getString("type");
+                personList.add(person);
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return personList;
+    }
 }
