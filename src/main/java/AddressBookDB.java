@@ -127,4 +127,34 @@ public class AddressBookDB {
         }
         return personList;
     }
+
+    public int getHeadCountByCity(String city) {
+        int num = 0;
+        String sql = String.format("select count(*) as CityCount from address_book where city = '%s'",city);
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                num = resultSet.getInt("CityCount");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return num;
+    }
+
+    public int getHeadCountByState(String state) {
+        int num = 0;
+        String sql = String.format("select count(*) as StateCount from address_book where state = '%s'",state);
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                num = resultSet.getInt("StateCount");
+            }
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+        return num;
+    }
 }

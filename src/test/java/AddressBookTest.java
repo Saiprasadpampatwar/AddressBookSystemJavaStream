@@ -37,5 +37,14 @@ public class AddressBookTest {
         List<Person> personList = addressBookDB.retrivePersondAddedInDateRange("2018-01-01","2018-05-05");
         Assert.assertEquals(4,personList.size());
     }
+
+    @Test
+    public void givenCityOrStateNameShouldRetriveNumberofContactsFromDB() {
+        AddressBookDB addressBookDB = new AddressBookDB();
+        int noOfContactsCity = addressBookDB.getHeadCountByCity("nanded");
+        int noOfContactsState = addressBookDB.getHeadCountByState("maharashtra");
+        Assert.assertEquals(4,noOfContactsState);
+        Assert.assertEquals(2,noOfContactsCity);
+    }
 }
 
