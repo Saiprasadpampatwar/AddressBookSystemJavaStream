@@ -1,6 +1,8 @@
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class AddressBookDB {
 
@@ -39,5 +41,52 @@ public class AddressBookDB {
             e.printStackTrace();
         }
         return personList;
+    }
+
+    public void addPersonToAddressBookDB(String firstname, String lastname, String address, String city, String state, int zip, int phone, String email, String type) {
+        List<Person> personList = new ArrayList<>();
+        String sql = String.format("insert into address_book (firstname,lastname,address,city,state,zip,phone_number,email,type) values ('%s','%s','%s','%s','%s','%s','%s','%s','%s')",firstname,
+                lastname,address,city,state,zip,phone,email,type);
+        Person person = new Person();
+        try(Connection connection = this.getConnection()){
+            Statement statement = connection.createStatement();
+            statement.executeUpdate(sql);
+            person.firstname = firstname;
+            person.lastname = lastname;
+            person.address = address;
+            person.city = city;
+            person.state = state;
+            person.zip = zip;
+            person.phoneno = phone;
+            person.email = email;
+            person.type = type;
+            personList.add(person);
+
+            /*ResultSet resultSet = statement.executeQuery(sql);
+            while (resultSet.next()){
+                person.firstname = resultSet.getString("firstname");
+                person.lastname = resultSet.getString("lastname");
+                person.address = resultSet.getString("address");
+                person.city = resultSet.getString("city");
+                person.state = resultSet.getString("state");
+                person.zip = resultSet.getInt("zip");
+                person.phoneno = resultSet.getInt("phone_number");
+                person.email = resultSet.getString("email");
+                person.type = resultSet.getString("type");
+                personList.add(person);
+            }*/
+
+        }catch (SQLException e){
+            e.printStackTrace();
+        }
+    }
+
+
+    public boolean checkPersonInSyncWithAddressBook(String firstname) {
+        List<Person> personsList = this.readAddressBookData();
+        List<Person> namelist = personsList.stream().filter(person -> person.firstname.equals(firstname)).collect(Collectors.toList());
+        if(namelist.get(0).firstname.equals(firstname))
+            return true;
+        return false;
     }
 }
