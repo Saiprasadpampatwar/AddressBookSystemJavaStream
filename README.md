@@ -27,3 +27,5 @@ UC18: Ability to Retrieve Contacts from the Database that were added in a partic
 UC19: Ability to Retrieve number of Contacts in the Database by City or State
 
 UC20: Ability to Add new Contact to the Address Book Database
+
+UC21: Ability to Add Multiple Contacts to the Address Book Database
