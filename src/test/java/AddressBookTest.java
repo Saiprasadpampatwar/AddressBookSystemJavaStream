@@ -2,6 +2,7 @@ import org.junit.Assert;
 import org.junit.Test;
 
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -45,6 +46,22 @@ public class AddressBookTest {
         int noOfContactsState = addressBookDB.getHeadCountByState("maharashtra");
         Assert.assertEquals(4,noOfContactsState);
         Assert.assertEquals(2,noOfContactsCity);
+    }
+
+    @Test
+    public void given3Persons_whenAddedToDB_shouldMatchEmployeeEntries() {
+
+        Person[] personsData = {
+                new Person("kishan","chouhan","kali","dehri","bihar",87567,98987,"kishan@gmail","friends"),
+                new Person("neeraj","aadwani","sasi","bhopal","MP",12354,6785,"neeraj@hjkd","friends"),
+                new Person("shishir","kumud","darya","bilaspur","chattisgadh",16783,77788,"shishir@wweed","friends")
+        };
+
+        AddressBookDB addressBookDB = new AddressBookDB();
+        addressBookDB.readPersonsWithThreads(Arrays.asList(personsData));
+        List<Person> personList = addressBookDB.readAddressBookData();
+        Assert.assertEquals(10,personList.size());
+
     }
 }
 

@@ -1,7 +1,5 @@
 import java.sql.*;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.stream.Collectors;
 
 public class AddressBookDB {
@@ -156,5 +154,29 @@ public class AddressBookDB {
             e.printStackTrace();
         }
         return num;
+    }
+
+    public void readPersonsWithThreads(List<Person> personList) {
+        Map<Integer, Boolean> personAdditionStatus = new HashMap<Integer, Boolean>();
+        personList.forEach(person -> {
+            Runnable task = () -> {
+                personAdditionStatus.put(person.hashCode(),false);
+                System.out.println("person being added : "+person.firstname);
+                this.addPersonToAddressBookDB(person.firstname,person.lastname,person.address,person.city,
+                        person.state,person.zip,person.phoneno,person.email,person.type);
+                personAdditionStatus.put(person.hashCode(),true);
+                System.out.println("Person Added " + Thread.currentThread().getName());
+            };
+            Thread thread = new Thread(task, person.firstname);
+            thread.start();
+        });
+        while(personAdditionStatus.containsValue(false)) {
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println(personList);
     }
 }
