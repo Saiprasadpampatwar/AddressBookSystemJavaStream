@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="RestAssureTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2020-12-28T16:47:19" hostname="DESKTOP-9G5SK1M" time="2.093">
+  <properties/>
+  <testcase name="readDataFromJsonServer" classname="RestAssureTest" time="2.093"/>
+  <system-out><![CDATA[HTTP/1.1 200 OK
+X-Powered-By: Express
+Vary: Origin, Accept-Encoding
+Access-Control-Allow-Credentials: true
+Cache-Control: no-cache
+Pragma: no-cache
+Expires: -1
+X-Content-Type-Options: nosniff
+Content-Type: application/json; charset=utf-8
+Content-Length: 229
+ETag: W/"e5-nIK+fP9+9dR3Py5iq9JjHeVJv9I"
+Date: Mon, 28 Dec 2020 16:47:21 GMT
+Connection: keep-alive
+Keep-Alive: timeout=5
+
+[
+    {
+        "firstname": "Sai",
+        "lastname": "pampatwar",
+        "address": "wadi",
+        "city": "nanded",
+        "state": "mah",
+        "zip": 4316,
+        "phoneno": 23456,
+        "email": "pam@gmail",
+        "type": "friends",
+        "id": 1
+    }
+]
+]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -182,7 +182,12 @@ public class AddressBookMainStream {
         boolean nextOption = true;
         while (nextOption) {
             System.out.println(
-                    "Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n 4. view person and states\n 5.find head count in city\n 6.find head count in state\n 7.Sorting of entries based on firstname\n 8.Sorting of entries based on city\n 9.Sorting of entries based on state\n 10.Sorting of entries based on zip\n 11.Write Addressbook Data into file\n 12.Read AddressBook Data From File\n 13.Write Data to CSV\n 14.Read Data From CSV\n 15.Exit");
+                    "Select 1. search a person by city\n 2.search a person by state\n 3. view person and cities\n " +
+                            "4. view person and states\n 5.find head count in city\n 6.find head count in state\n " +
+                            "7.Sorting of entries based on firstname\n 8.Sorting of entries based on city\n " +
+                            "9.Sorting of entries based on state\n 10.Sorting of entries based on zip\n " +
+                            "11.Write Addressbook Data into file\n 12.Read AddressBook Data From File\n " +
+                            "13.Write Data to CSV\n 14.Read Data From CSV\n 15.exit");
             int option = sc.nextInt();
             switch (option) {
                 case 1:
